@@ -1,0 +1,43 @@
+INTRODUCTION
+-----------------------------
+fabprobe is the sum of two distinct tools: DSLprobe and FAB-Probe. DSLprobe measures the capacity of non-cooperative hosts. The tool has been tested on a large variety of ADSL links but should also work on other technologies as well. FAB-Probe, instead, measures the *available bandwidth* of non-cooperative hosts. It is a Probe Rate Model (PRM) tool based on Pathload and has been designed for large-scale measurements campaigns. It employs a new strategy to sample the available bandwidth efficiently. FAB-Probe is the natural evolution of ABwProbe (another non-cooperative tool), where accuracy has been balanced with the running time.
+
+For more information on the tools, please visit www.eurecom.fr/~btroup/fabprobe.html 
+You may also refer to the READMEpathload file.
+
+SYNOPSIS
+-----------------------------
+fabprobe -d DESTINATION [-a|-c CAPACITY] [-p PORT] [-u UDP_PORT]
+         [-s SIZE] [-z] [-0][-1][-2][-3][-4][-5] [-q] [-h|-H]
+
+DESCRIPTION
+-----------------------------
+fabprobe estimates the available bandwidth of and ADSL link. It also incudes the capacity estimation tecniques of DSLprobe (see ACM CoNEXT'08) and can thus estimate the capacity or the available bandwidth or both of any ADSL host replying to ACK probes.
+
+OPTIONS
+-----------------------------
+-d DESTINATION  : destination host address
+-a              : measure the available bandwidth
+                : IMPORTANT! If this option is not set, only the capacity is measured!
+-c CAPACITY     : do NOT estimate the capacity (implies -a)
+                : use CAPACITY as the downlink capacity instead (in kbps)
+
+PACKET SETTINGS:
+-p PORT         : use (TCP) port PORT as the destination port number (default is 80)
+-u UDP_PORT     : use UDP probes towards port UDP_PORT (capacity estimation only)
+-s SIZE         : use probes of at SIZE Bytes (avail-bw only, default 1500B)
+-z              : vary src port number (default 50003)
+
+TCP FLAGS:
+-0              : set URG flag on (default is off)
+-1              : set ACK flag on (default is off)
+-2              : set PSH flag on (default is off)
+-3              : set RST flag on (default is off)
+-4              : set SYN flag on (default is off)
+-5              : set FIN flag on (default is off)
+
+-q              : run quietly
+-h|-H           : print help and exit
+
+
+Please report any bugs or problems by sending an email to: daniele croce eurecom fr

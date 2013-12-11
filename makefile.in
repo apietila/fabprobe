@@ -1,0 +1,25 @@
+CC=@PTHREAD_CC@
+
+CFLAGS=@CFLAGS@ @PTHREAD_CFLAGS@ @DEFS@ @THRLIB@
+CPPFLAGS=@CPPFLAGS@
+LIBS=`libnet/libnet-config --libs` -lpcap @LIBS@ @PTHREAD_LIBS@
+LDFLAGS=@LDFLAGS@
+DEFINES = `libnet/libnet-config --defines` @DEFS@
+LIBDIR = -Llibnet -L/usr/lib
+
+OBJS=qr.o robustfit.o nrutil.o fabprobe_utils.o fabprobe_snd.o fabprobe_snd_func.o
+
+TARGETS=fabprobe_snd
+
+all:${TARGETS} clean
+
+fabprobe_snd: $(OBJS)
+	 $(CC) $(LIBDIR) $(DEFINES) $(OBJS) -o fabprobe_snd $(LIBS) $(LDFLAGS) $(CFLAGS)
+
+fabprobe_snd.o fabprobe_snd_func.o: fabprobe_gbls.h fabprobe_snd.h
+
+clean: 
+	 rm -f ${OBJS} config.cache config.log  config.status
+
+distclean: 
+	 rm -f ${OBJS} ${TARGETS} config.cache config.log makefile config.status
